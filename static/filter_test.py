@@ -31,6 +31,7 @@ def get_total_sales_from_db(date_from, date_to):
     result = cursor.fetchone()
     return int(result[0]) if result[0] is not None else 0  
 
+#TC_ID: C_01 - Kiểm tra lọc ngày hợp lệ (Khoảng thời giancó dữ liệu)
 def test_case_01(driver):
     date_from = "01-01-2022"
     date_to = "12-31-2024"
@@ -62,7 +63,7 @@ def test_case_01(driver):
     total_sales_db = get_total_sales_from_db(date_from, date_to)
     assert total_sales_web == total_sales_db
 
-#TC_ID: C_02 - Kiểm tra lọc ngày hợp lệ (Khoảng thời gian không có dữ liệu)
+#TC_ID: C_02 - Kiểm tra lọc ngày không hợp lệ (Khoảng thời gian không có dữ liệu)
 def test_case_02(driver):
     date_from_input = driver.find_element(By.NAME, "date-from")
     date_to_input = driver.find_element(By.NAME, "date-to")
