@@ -109,8 +109,7 @@ def test_case_04(driver):
     no_result_message = "Không có kết quả thống kê nào trong khoảng thời gian này để hiển thị!"
     try:
         message_element = driver.find_element(By.XPATH, "//td[@colspan='6']")
-        assert message_element.text == no_result_message, \
-            f"Thông báo mong đợi: '{no_result_message}', nhưng nhận được '{message_element.text}'"
+        assert message_element.text == no_result_message
     except:
         rows = driver.find_elements(By.XPATH, "//table[@class='statistic-product-sale__table']/tbody/tr")
         assert len(rows) > 0
@@ -134,14 +133,11 @@ def test_case_06(driver):
     submit_button = driver.find_element(By.NAME, "submit")
     submit_button.click()
     
-    #TH1: Không có đơn hàng vào thời gian hiện tại
     no_result_message = "Không có kết quả thống kê nào trong khoảng thời gian này để hiển thị!"
     try:
         message_element = driver.find_element(By.XPATH, "//td[@colspan='6']")
-        assert message_element.text == no_result_message, \
-            f"Thông báo mong đợi: '{no_result_message}', nhưng nhận được '{message_element.text}'"
+        assert message_element.text == no_result_message
     except:
-    #TH2: Có đơn hàng vào thời gian hiện tại
         rows = driver.find_elements(By.XPATH, "//table[@class='statistic-product-sale__table']/tbody/tr")
         assert len(rows) > 0
 
