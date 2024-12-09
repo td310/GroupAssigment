@@ -338,7 +338,7 @@ def test_case_10(driver):
         
     existing_products = get_product_from_db()
     existing_product_names = [product[0] for product in existing_products] 
-    assert product_name_test in existing_product_names
+    assert product_name_test not in existing_product_names
 
     form.submit_form(action="insert")
     time.sleep(1)
