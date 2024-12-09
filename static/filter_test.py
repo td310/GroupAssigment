@@ -14,30 +14,22 @@ def driver():
     driver.quit()
 
 def get_total_sales_from_db(date_from, date_to):
-    try:
-        connection = pymysql.connect(
-            host='localhost',  
-            user='root',            
-            password='',              
-            database='vutrudongho2',  
-        )
-        cursor = connection.cursor()
+    connection = pymysql.connect(
+        host='localhost',  
+        user='root',            
+        password='',              
+        database='vutrudongho2',  
+    )
+    cursor = connection.cursor()
         
-        query = f"""
-        select SUM(d.Quantity) 
-        from `order` as o, `order_line` as d
-        where o.OrderID = d.OrderID and Date(o.OderDate) between '2022-01-01' AND '2024-12-31';
-        """
-        cursor.execute(query)
-        result = cursor.fetchone()
-
-        return int(result[0]) if result[0] is not None else 0  
-    except Exception as e:
-        print(f"Lỗi kết nối cơ sở dữ liệu: {e}")
-        return 0
-    finally:
-        if 'connection' in locals():
-            connection.close()
+    query = f"""
+    select SUM(d.Quantity) 
+    from `order` as o, `order_line` as d
+    where o.OrderID = d.OrderID and Date(o.OderDate) between '2022-01-01' AND '2024-12-31';
+    """
+    cursor.execute(query)
+    result = cursor.fetchone()
+    return int(result[0]) if result[0] is not None else 0  
 
 def test_case_01(driver):
     date_from = "01-01-2022"
@@ -68,7 +60,7 @@ def test_case_01(driver):
             break  
     
     total_sales_db = get_total_sales_from_db(date_from, date_to)
-    assert total_sales_web == total_sales_db, f"Tổng doanh số không khớp! Web: {total_sales_web}, DB: {total_sales_db}"
+    assert total_sales_web == total_sales_db
 
 #TC_ID: C_02 - Kiểm tra lọc ngày hợp lệ (Khoảng thời gian không có dữ liệu)
 def test_case_02(driver):
