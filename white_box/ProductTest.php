@@ -41,7 +41,7 @@ class ProductTest extends TestCase
         return mysqli_query($this->db, $query);
     }
 
-    public function testThemSanPhamThanhCong()
+       public function testThemSanPhamThanhCong()
     {
         $_POST['submit'] = 'insert';
         $_POST['brand'] = 'Casio'; 
@@ -93,19 +93,18 @@ class ProductTest extends TestCase
 
         $this->assertEquals($_POST['product-name'], $product['ProductName'], 'Tên sản phẩm đúng.');
         $this->assertEquals($expectedBrandID, $product['BrandID'], 'Thương hiệu đúng.');
-        $this->assertEquals(1200000, $product['PriceToSell'], 'Giá bán đúng.');
-        $this->assertEquals(1000000, $product['ImportPrice'], 'Giá nhập đúng.');
-        $this->assertEquals(10, $product['Discount'], 'Giảm giá đúng.');
-        $this->assertEquals('Đồng hồ cơ', $product['Model'], 'Mô hình đúng.');
-        $this->assertEquals('Màu đỏ', $product['Color'], 'Màu sắc đúng.');
-        $this->assertEquals('Unisex', $product['Gender'], 'Giới tính đúng.');
-        $this->assertEquals('This is a product description.', $product['Description'], 'Mô tả đúng.');
+        $this->assertEquals($_POST['price-to-sell'], $product['PriceToSell'], 'Giá bán đúng.');
+        $this->assertEquals($_POST['import-price'], $product['ImportPrice'], 'Giá nhập đúng.');
+        $this->assertEquals($_POST['discount'], $product['Discount'], 'Giảm giá đúng.');
+        $this->assertEquals($_POST['model'], $product['Model'], 'Mô hình đúng.');
+        $this->assertEquals($_POST['color'], $product['Color'], 'Màu sắc đúng.');
+        $this->assertEquals($_POST['gender'], $product['Gender'], 'Giới tính đúng.');
+        $this->assertEquals($_POST['desc'], $product['Description'], 'Mô tả đúng.');
         $this->assertEquals('a.jpg', $product['ProductImg'], 'Hình ảnh đúng.');
         $this->assertEquals(1, $product['Status'], 'Trạng thái đúng.');
 
         $this->deleteProduct($_POST['product-name']);
     }
-
     public function testKhongDienThongTinBatBuoc()
     {
         $_POST['submit'] = 'insert';
